@@ -1,9 +1,9 @@
-test = [7,7,2,7,0,3,6,7]
+test = [7,7,2,6,5,3,6,1]
 
 conflict = 0;
 
 def main():
-    EastConflict(7);
+    NorthEastConflict(1);
     print(conflict);
 
 def NorthWestConflict(cur_index):
@@ -72,6 +72,19 @@ def EastConflict(cur_index):
         if(test[cur_index] == test[index_counter]):
             print("Same on column: ",index_counter)
             conflict += 1           
-    
+
+def NorthEastConflict(cur_index):
+    global conflict
+    print("Searching for conflicts on NorthEastConflict")
+    index_counter = cur_index
+    column_value = test[cur_index]
+    while(index_counter != 7 and column_value != 0):
+        index_counter += 1
+        column_value -= 1
+        print("Index_counter: ",index_counter)
+        if( column_value == test[index_counter]):
+            print("Actual Column value: ",column_value)
+            print("Col val: ",test[index_counter])
+            conflict += 1    
 
 main();
