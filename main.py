@@ -1,13 +1,14 @@
-test = [7,0,3,7,0,3,0,4]
+test = [7,7,6,7,0,3,0,4]
 
-#expects 1
+conflict = 0;
+
 def main():
-    conflict = West(3);
+    SouthWest(5);
     print(conflict);
 
 def NorthWestConflict(cur_index):
-    print("Testing NorthWestConflict")
-    conflict = 0;
+    global conflict
+    print("Searching for conflicts on NorthWestConflict")
     index_counter = cur_index
     column_value = test[cur_index]
     while(index_counter != 0 and column_value != 0):
@@ -19,10 +20,9 @@ def NorthWestConflict(cur_index):
             print("Col val: ",test[index_counter])
             conflict += 1
 
-    return conflict
-
 def West(cur_index):
-    print("Testing West")
+    global conflict
+    print("Searching for conflicts on West")
     conflict = 0;
     index_counter = cur_index
     while(index_counter != 0):
@@ -31,8 +31,21 @@ def West(cur_index):
         if(test[cur_index] == test[index_counter]):
             print("Same on column: ",index_counter)
             conflict += 1
-            
-    return conflict
+        
+
+def SouthWest(cur_index):
+    global conflict
+    print("Searching for conflicts on SouthWest")
+    index_counter = cur_index
+    column_value = test[cur_index]
+    while(index_counter != 0 and column_value != 7):
+        index_counter -= 1
+        column_value += 1
+        print("Index_counter: ",index_counter)
+        if( column_value == test[index_counter]):
+            print("Actual Column value: ",column_value)
+            print("Col val: ",test[index_counter])
+            conflict += 1
             
     
 
