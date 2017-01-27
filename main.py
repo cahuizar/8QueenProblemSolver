@@ -3,7 +3,7 @@ test = [7,7,2,7,0,3,6,7]
 conflict = 0;
 
 def main():
-    SouthEast(2);
+    EastConflict(7);
     print(conflict);
 
 def NorthWestConflict(cur_index):
@@ -20,7 +20,7 @@ def NorthWestConflict(cur_index):
             print("Col val: ",test[index_counter])
             conflict += 1
 
-def West(cur_index):
+def WestConflict(cur_index):
     global conflict
     print("Searching for conflicts on West")
     conflict = 0;
@@ -33,7 +33,7 @@ def West(cur_index):
             conflict += 1
         
 
-def SouthWest(cur_index):
+def SouthWestConflict(cur_index):
     global conflict
     print("Searching for conflicts on SouthWest")
     index_counter = cur_index
@@ -47,7 +47,7 @@ def SouthWest(cur_index):
             print("Col val: ",test[index_counter])
             conflict += 1
 
-def SouthEast(cur_index):
+def SouthEastConflict(cur_index):
     global conflict
     print("Searching for conflicts on SouthEast")
     index_counter = cur_index
@@ -60,7 +60,18 @@ def SouthEast(cur_index):
             print("Actual Column value: ",column_value)
             print("Col val: ",test[index_counter])
             conflict += 1
-               
+
+def EastConflict(cur_index):
+    global conflict
+    print("Searching for conflicts on East")
+    conflict = 0;
+    index_counter = cur_index
+    while(index_counter != 7):
+        print("Index_counter: ",index_counter)
+        index_counter += 1
+        if(test[cur_index] == test[index_counter]):
+            print("Same on column: ",index_counter)
+            conflict += 1           
     
 
 main();
