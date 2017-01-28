@@ -2,9 +2,21 @@ test = [7,7,2,6,5,3,6,1]
 
 conflict = 0;
 
+#create conflict function
+
 def main():
-    NorthEastConflict(1);
-    print(conflict);
+    NorthEastConflict(1)
+    print(conflict)
+
+def Initialize()
+    column_conflict = []
+    for(int x =0; x < 8; x++):
+        column_conflict[x] = InitConflict()
+        
+
+def InitConflict()
+    
+    
 
 def NorthWestConflict(cur_index):
     global conflict
