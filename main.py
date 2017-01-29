@@ -21,7 +21,7 @@ def Initialize():
     column_conflict = [-9,-9,-9,-9,-9,-9,-9,-9]
     for column in range(0,8):
         for row in range(0, 8):
-            column_conflict[row] = InitConflict(column)
+            column_conflict[row] = InitConflict(row, column)
             print "Conflict = "+ str(column_conflict[row]) +" for row "+ str(row)
         queens[column] = RowPicker(column_conflict)
 
@@ -46,65 +46,68 @@ def RowPicker(column_conflict):
 def RandomPicker(temp_min_value):
     return random.choice(temp_min_value)
     
-def InitConflict(row):
+def InitConflict(row, column):
     conflict = 0
-    conflict = NorthWestConflict(row, conflict)
+    conflict = NorthWestConflict(row, column, conflict)
     print(str(conflict))
     conflict = WestConflict(row, conflict)
     print(str(conflict))
-    conflict = SouthWestConflict(row, conflict)
+    conflict = SouthWestConflict(row, column, conflict)
     print(str(conflict))
     return conflict    
     
-def NorthWestConflict(cur_index, conflict):
+def NorthWestConflict(row, column, conflict):
     global queens
     print("Searching for conflicts on NorthWestConflict")
-    index_counter = cur_index
-    column_value = cur_index
-    while(index_counter != 0 and column_value != 0):
+    index_counter = row
+    column_counter = column
+    print "Column: "+ str(column_counter)
+    print "Row: "+ str(index_counter)
+    while(index_counter != 0 and column_counter !=0):
         index_counter -= 1
-        column_value -= 1
+        column_counter -= 1
+        print "Index counter = "+ str(index_counter) + " and queens is "+ str(queens[column_counter])
         #print("Index_counter: ",index_counter)
-        if( column_value == queens[index_counter]):
-            #print("Actual Column value: ",column_value)
-            #print("Col val: ",queens[index_counter])
+        if( index_counter == queens[column_counter]):
+            print("Actual Column value: ",index_counter)
+            print("Col val: ",queens[index_counter])
             conflict += 1
     return conflict
 
-def WestConflict(cur_index, conflict):
+def WestConflict(row, conflict):
     global queens
     print("Searching for conflicts on West")
-    conflict = 0;
-    index_counter = cur_index
+    index_counter = row
     while(index_counter != 0):
         #print("Index_counter: ",index_counter)
         index_counter -= 1
-        if(cur_index == queens[index_counter]):
+        if(row == queens[index_counter]):
             #print("Same on column: ",index_counter)
             conflict += 1
     return conflict
         
 
-def SouthWestConflict(cur_index, conflict):
+def SouthWestConflict(row, column, conflict):
     global queens
     print("Searching for conflicts on SouthWest")
-    index_counter = cur_index
-    column_value = cur_index
-    while(index_counter != 0 and column_value != 7):
+    index_counter = row
+    column_counter = column
+    while(index_counter != 0 and column_counter != 7):
         index_counter -= 1
-        column_value += 1
-        #print("Index_counter: ",index_counter)
-        if( column_value == queens[index_counter]):
+        column_counter += 1
+        print "Column: "+ str(column_counter)
+        print "Row: "+ str(index_counter)
+        if( index_counter == queens[column_counter]):
             #print("Actual Column value: ",column_value)
             #print("Col val: ",queens[index_counter])
             conflict += 1
     return conflict
 
-def SouthEastConflict(cur_index, conflict):
+def SouthEastConflict(row, conflict):
     global queens
     print("Searching for conflicts on SouthEast")
-    index_counter = cur_index
-    column_value = test[cur_index]
+    index_counter = row
+    column_value = test[row]
     while(index_counter != 7 and column_value != 7):
         index_counter += 1
         column_value += 1
@@ -115,24 +118,24 @@ def SouthEastConflict(cur_index, conflict):
             conflict += 1
     return conflict
 
-def EastConflict(cur_index, conflict):
+def EastConflict(row, conflict):
     global queens
     print("Searching for conflicts on East")
     conflict = 0;
-    index_counter = cur_index
+    index_counter = row
     while(index_counter != 7):
         #print("Index_counter: ",index_counter)
         index_counter += 1
-        if(test[cur_index] == test[index_counter]):
+        if(test[row] == test[index_counter]):
             #print("Same on column: ",index_counter)
             conflict += 1
     return conflict
 
-def NorthEastConflict(cur_index, conflict):
+def NorthEastConflict(row, conflict):
     global queens
     print("Searching for conflicts on NorthEastConflict")
-    index_counter = cur_index
-    column_value = test[cur_index]
+    index_counter = row
+    column_value = test[row]
     while(index_counter != 7 and column_value != 0):
         index_counter += 1
         column_value -= 1
