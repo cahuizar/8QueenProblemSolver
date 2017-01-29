@@ -1,3 +1,5 @@
+import random
+
 test = [7,7,2,6,5,3,6,1]
 
 queens = [-9,-9,-9,-9,-9,-9,-9,-9]
@@ -9,13 +11,14 @@ def main():
     Initialize()
 
 def Initialize():
+    global queens
     column_conflict = [-9,-9,-9,-9,-9,-9,-9,-9]
-    for column in range(0,7):
-        for row in range(0, 7):
+    for column in range(0,8):
+        for row in range(0, 8):
             column_conflict[row] = InitConflict(column)
             print(column_conflict[row])
-        RowPicker(column_conflict)
-        print("DONE")
+        queens[column] = RowPicker(column_conflict)
+        print("Queen in Column ",column," is ",queens[column])
 
 def RowPicker(column_conflict):
     min_value = column_conflict[0]
@@ -29,7 +32,11 @@ def RowPicker(column_conflict):
             min_value = column_conflict[x]
         elif(min_value == column_conflict[x]):
             temp_min_value.append(x)
+    random_pick = RandomPicker(temp_min_value)
+    return random_pick
     
+def RandomPicker(temp_min_value):
+    return random.choice(temp_min_value)
     
 def InitConflict(row):
     conflict = 0
