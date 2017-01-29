@@ -14,8 +14,23 @@ def Initialize():
         for row in range(0, 7):
             column_conflict[row] = InitConflict(column)
             print(column_conflict[row])
+        RowPicker(column_conflict)
         print("DONE")
-        
+
+def RowPicker(column_conflict):
+    min_value = column_conflict[0]
+    min_value_counter = 0;
+    temp_min_value= [min_value]
+    for x in range(1,7):
+        # smallest value found, delete values in list
+        if(min_value > column_conflict[x]):
+            del temp_min_value[:]
+            column_conflict.append(x)
+            min_value = column_conflict[x]
+        elif(min_value == column_conflict[x]):
+            temp_min_value.append(x)
+    
+    
 def InitConflict(row):
     conflict = 0
     conflict = NorthWestConflict(row, conflict)
@@ -24,7 +39,6 @@ def InitConflict(row):
     return conflict    
     
 def NorthWestConflict(cur_index, conflict):
-    global queens
     print("Searching for conflicts on NorthWestConflict")
     index_counter = cur_index
     column_value = cur_index
