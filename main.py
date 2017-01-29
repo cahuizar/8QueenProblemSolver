@@ -90,16 +90,16 @@ def WestConflict(row, conflict):
 def SouthWestConflict(row, column, conflict):
     global queens
     print("Searching for conflicts on SouthWest")
-    index_counter = row
-    column_counter = column
-    while(index_counter != 0 and column_counter != 7):
-        index_counter -= 1
-        column_counter += 1
-        print "Column: "+ str(column_counter)
-        print "Row: "+ str(index_counter)
-        if( index_counter == queens[column_counter]):
+    while(column != 0 and row != 7):
+        row += 1
+        column -= 1
+        print "Column: "+ str(column)
+        print "Row: "+ str(row)
+        print "Column = "+ str(column) + " and queens is "+ str(queens[row])
+        if( row == queens[column]):
             #print("Actual Column value: ",column_value)
             #print("Col val: ",queens[index_counter])
+            print "Conflict found"
             conflict += 1
     return conflict
 
