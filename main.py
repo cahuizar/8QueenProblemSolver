@@ -7,19 +7,18 @@ def main():
     global queens
     queens = [-9,-9,-9,-9,-9,-9,-9,-9]
     Initialize()
-    Tranverse()
+    Search()
 
-def Tranverse():
-    Conflict(2,3)
+def Search():
+    ConflictCount(4,1)
 
-def Conflict(row, column):
+def ConflictCount(row, column):
     conflict = 0
-    conflict = EastConflict(row, column, conflict)
+    conflict = SouthEastConflict(row, column, conflict)
     print(str(conflict))
 
 def showQueens():
     global queens
-    print 'Queens: '
     pprint(queens)
     
 def Initialize():
@@ -29,7 +28,8 @@ def Initialize():
         for row in range(0, 8):
             column_conflict[row] = InitConflict(row, column)
         queens[column] = RowPicker(column_conflict)
-        showQueens()
+    print 'Initialized Queens:'
+    showQueens()
 
 def RowPicker(column_conflict):
     random_pick = 0
@@ -89,12 +89,10 @@ def SouthWestConflict(row, column, conflict):
 def SouthEastConflict(row, column, conflict):
     global queens
     print("Searching for conflicts on SouthEast")
-    index_counter = row
-    column_value = test[row]
-    while(index_counter != 7 and column_value != 7):
-        index_counter += 1
-        column_value += 1
-        if( column_value == test[index_counter]):
+    while(row != 7 and column != 7):
+        row += 1
+        column += 1
+        if(row == queens[column]):
             conflict += 1
     return conflict
 
