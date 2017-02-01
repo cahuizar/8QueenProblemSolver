@@ -9,17 +9,24 @@ def main():
     Initialize()
     Search()
 
+def showQueens():
+    global queens
+    pprint(queens)
+
 def Search():
-    ConflictCount(4,1)
+    conflict = ConflictCount(7,7)
+    print(str(conflict))
+    
 
 def ConflictCount(row, column):
     conflict = 0
     conflict = SouthEastConflict(row, column, conflict)
-    print(str(conflict))
-
-def showQueens():
-    global queens
-    pprint(queens)
+    conflict = EastConflict(row, column, conflict)
+    conflict = NorthEastConflict(row, column, conflict)
+    conflict = NorthWestConflict(row, column, conflict)
+    conflict = WestConflict(row, column, conflict)
+    conflict = SouthWestConflict(row, column, conflict)
+    return conflict
     
 def Initialize():
     global queens
@@ -57,7 +64,6 @@ def InitConflict(row, column):
     
 def NorthWestConflict(row, column, conflict):
     global queens
-    print("Searching for conflicts on NorthWestConflict")
     index_counter = row
     column_counter = column
     while(index_counter != 0 and column_counter !=0):
@@ -69,7 +75,6 @@ def NorthWestConflict(row, column, conflict):
 
 def WestConflict(row, column, conflict):
     global queens
-    print("Searching for conflicts on West")
     while(column != 0):
         column -= 1
         if(queens[column] == row):
@@ -78,7 +83,6 @@ def WestConflict(row, column, conflict):
 
 def SouthWestConflict(row, column, conflict):
     global queens
-    print("Searching for conflicts on SouthWest")
     while(column != 0 and row != 7):
         row += 1
         column -= 1
@@ -88,7 +92,6 @@ def SouthWestConflict(row, column, conflict):
 
 def SouthEastConflict(row, column, conflict):
     global queens
-    print("Searching for conflicts on SouthEast")
     while(row != 7 and column != 7):
         row += 1
         column += 1
@@ -98,7 +101,6 @@ def SouthEastConflict(row, column, conflict):
 
 def EastConflict(row, column, conflict):
     global queens
-    print("Searching for conflicts on East")
     while(column != 7):
         column += 1
         if(queens[column] == row):
@@ -107,7 +109,6 @@ def EastConflict(row, column, conflict):
 
 def NorthEastConflict(row, column, conflict):
     global queens
-    print("Searching for conflicts on NorthEastConflict")
     while(row != 0 and column != 7):
         row -= 1
         column += 1
