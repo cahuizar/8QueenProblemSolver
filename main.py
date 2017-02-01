@@ -25,14 +25,18 @@ def Search():
         for row in range(0, 8):
             column_conflict[row] = ConflictCount(row, column)
         queens[column] = RowPicker(column_conflict)
-        if(no_conflict == 8):
-            isFinalState = True
-            print "Solution: "
-            showQueens()
+        if(column == 0):
+            column = 7
         else:
             column -= 1
-        if(column < 0):
-          column = 7   
+        isFinalState = InFinalState()
+            
+def InFinalState():
+    if(no_conflict == 8):
+        print "Solution: "
+        showQueens()
+        return True
+    return False
     
 def ConflictCount(row, column):
     conflict = 0
