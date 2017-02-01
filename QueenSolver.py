@@ -4,17 +4,16 @@ from pprint import pprint
 random.seed(5)
 
 class QueenSolver:
-
-    
-
     def __init__(self):
         self.queens = [-9,-9,-9,-9,-9,-9,-9,-9]
         self.no_conflict = 0
         self.isFinalState = False
         self.column_conflict = [-9,-9,-9,-9,-9,-9,-9,-9]
+        self.movesCounter = 0
 
     def showQueens(self):
         pprint(self.queens)
+        print '\n'
 
     def Search(self):
         column = 7
@@ -22,6 +21,8 @@ class QueenSolver:
             for row in range(0, 8):
                 self.column_conflict[row] = self.ConflictCount(row, column)
             self.queens[column] = self.RowPicker(self.column_conflict)
+            self.movesCounter += 1;
+            print 'Queen moves counter: '+str(self.movesCounter)
             if(column == 0):
                 column = 7
             else:
@@ -30,9 +31,12 @@ class QueenSolver:
                 
     def InFinalState(self):
         if(self.no_conflict == 8):
-            print "Solution: "
+            print "Final State list: "
             self.showQueens()
             return True
+        else:
+            print "New Queen list: "
+            self.showQueens() 
         return False
         
     def ConflictCount(self, row, column):
