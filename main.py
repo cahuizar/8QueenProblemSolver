@@ -10,11 +10,11 @@ def main():
     Tranverse()
 
 def Tranverse():
-    Conflict(7,2)
+    Conflict(2,3)
 
 def Conflict(row, column):
     conflict = 0
-    conflict = NorthEastConflict(row, column, conflict)
+    conflict = EastConflict(row, column, conflict)
     print(str(conflict))
 
 def showQueens():
@@ -51,11 +51,8 @@ def RandomPicker(temp_min_conflict):
 def InitConflict(row, column):
     conflict = 0
     conflict = NorthWestConflict(row, column, conflict)
-    #print(str(conflict))
     conflict = WestConflict(row, column, conflict)
-    #print(str(conflict))
     conflict = SouthWestConflict(row, column, conflict)
-    #print(str(conflict))
     return conflict    
     
 def NorthWestConflict(row, column, conflict):
@@ -89,7 +86,7 @@ def SouthWestConflict(row, column, conflict):
             conflict += 1
     return conflict
 
-def SouthEastConflict(row, conflict):
+def SouthEastConflict(row, column, conflict):
     global queens
     print("Searching for conflicts on SouthEast")
     index_counter = row
@@ -101,22 +98,18 @@ def SouthEastConflict(row, conflict):
             conflict += 1
     return conflict
 
-def EastConflict(row, conflict):
+def EastConflict(row, column, conflict):
     global queens
     print("Searching for conflicts on East")
-    conflict = 0;
-    index_counter = row
-    while(index_counter != 7):
-        index_counter += 1
-        if(test[row] == test[index_counter]):
+    while(column != 7):
+        column += 1
+        if(queens[column] == row):
             conflict += 1
     return conflict
 
 def NorthEastConflict(row, column, conflict):
     global queens
     print("Searching for conflicts on NorthEastConflict")
-    index_counter = row
-    column_counter = column
     while(row != 0 and column != 7):
         row -= 1
         column += 1
