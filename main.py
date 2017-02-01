@@ -5,6 +5,8 @@ random.seed(5)
 
 def main():
     global queens
+    global no_conflict
+    no_conflict = 0
     queens = [-9,-9,-9,-9,-9,-9,-9,-9]
     Initialize()
     Search()
@@ -14,10 +16,24 @@ def showQueens():
     pprint(queens)
 
 def Search():
-    conflict = ConflictCount(7,7)
-    print(str(conflict))
+    global no_conflict
+    global queens
+    isFinalState = False
+    column = 7
+    column_conflict = [-9,-9,-9,-9,-9,-9,-9,-9]
+    while(isFinalState == False):
+        for row in range(0, 8):
+            column_conflict[row] = ConflictCount(row, column)
+        queens[column] = RowPicker(column_conflict)
+        if(no_conflict == 8):
+            isFinalState = True
+            print "Solution: "
+            showQueens()
+        else:
+            column -= 1
+        if(column < 0):
+          column = 7   
     
-
 def ConflictCount(row, column):
     conflict = 0
     conflict = SouthEastConflict(row, column, conflict)
@@ -39,6 +55,7 @@ def Initialize():
     showQueens()
 
 def RowPicker(column_conflict):
+    global no_conflict
     random_pick = 0
     min_value = column_conflict[0]
     temp_min_conflict = [0]
@@ -49,6 +66,10 @@ def RowPicker(column_conflict):
             temp_min_conflict.append(x)
         elif(min_value == column_conflict[x]):
             temp_min_conflict.append(x)
+    if(min_value == 0):
+        no_conflict += 1
+    else:
+        no_conflict = 0
     random_pick = RandomPicker(temp_min_conflict)
     return random_pick
     
