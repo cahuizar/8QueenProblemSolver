@@ -8,7 +8,7 @@ def main():
     global no_conflict
     no_conflict = 0
     queens = [-9,-9,-9,-9,-9,-9,-9,-9]
-    Initialize()
+    Initialization()
     Search()
 
 def showQueens():
@@ -48,7 +48,7 @@ def ConflictCount(row, column):
     conflict = SouthWestConflict(row, column, conflict)
     return conflict
     
-def Initialize():
+def Initialization():
     global queens
     column_conflict = [-9,-9,-9,-9,-9,-9,-9,-9]
     for column in range(0,8):
