@@ -3,9 +3,11 @@
 ##Purpose
 This program was created for CSCI-48700 with the purpose that it will solve the 8 queens problem by using a min-conflict algorithm
 
-##How to use
-**I used Python 2.7.13**
+##Expected Output
+1. After Initialization() - Queens Array = [4, 6, 3, 5, 7, 1, 0, 2]
+2. Solution - Queens Array = [5, 3, 6, 0, 7, 1, 4, 2]
 
-1. Clone repo
-2. Run in Python
-3. Please note that I am using a random.seed(5), you may remove it to ensure the it is truly random each time.
+##Other Instructions
+1. random.seed(5)
+2. Python 2.7.13
+3. 
