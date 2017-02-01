@@ -1,14 +1,26 @@
 import random
+from pprint import pprint
+
+random.seed(5)
 
 def main():
     global queens
     queens = [-9,-9,-9,-9,-9,-9,-9,-9]
     Initialize()
-    
+    Tranverse()
+
+def Tranverse():
+    Conflict(7,2)
+
+def Conflict(row, column):
+    conflict = 0
+    conflict = NorthEastConflict(row, column, conflict)
+    print(str(conflict))
+
 def showQueens():
     global queens
-    for x in range(0,8):
-        print str(queens[x])
+    print 'Queens: '
+    pprint(queens)
     
 def Initialize():
     global queens
@@ -23,8 +35,6 @@ def RowPicker(column_conflict):
     random_pick = 0
     min_value = column_conflict[0]
     temp_min_conflict = [0]
-    for y in range(len(column_conflict)):
-        print column_conflict[y]
     for x in range(1,8):
         if(min_value > column_conflict[x]):
             temp_min_conflict[:] = []
@@ -41,11 +51,11 @@ def RandomPicker(temp_min_conflict):
 def InitConflict(row, column):
     conflict = 0
     conflict = NorthWestConflict(row, column, conflict)
-    print(str(conflict))
+    #print(str(conflict))
     conflict = WestConflict(row, column, conflict)
-    print(str(conflict))
+    #print(str(conflict))
     conflict = SouthWestConflict(row, column, conflict)
-    print(str(conflict))
+    #print(str(conflict))
     return conflict    
     
 def NorthWestConflict(row, column, conflict):
@@ -102,15 +112,15 @@ def EastConflict(row, conflict):
             conflict += 1
     return conflict
 
-def NorthEastConflict(row, conflict):
+def NorthEastConflict(row, column, conflict):
     global queens
     print("Searching for conflicts on NorthEastConflict")
     index_counter = row
-    column_value = test[row]
-    while(index_counter != 7 and column_value != 0):
-        index_counter += 1
-        column_value -= 1
-        if( column_value == test[index_counter]):
+    column_counter = column
+    while(row != 0 and column != 7):
+        row -= 1
+        column += 1
+        if( row == queens[column]):
             conflict += 1
     return conflict
 
