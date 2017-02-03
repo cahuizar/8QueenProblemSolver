@@ -17,12 +17,19 @@ class QueenSolver:
 
     def Search(self):
         column = 7
+        self.same_col = False
+        self.no_change = 0
         while(self.isFinalState == False):
             for row in range(0, 8):
                 self.column_conflict[row] = self.ConflictCount(row, column)
+            cur_queen_position = self.queens[column]
             self.queens[column] = self.RowPicker(self.column_conflict)
-            self.movesCounter += 1;
-            print 'Queen moves counter: '+str(self.movesCounter)
+            if(cur_queen_position == self.queens[column]):
+               self.same_col = True
+               self.no_change += 1
+            else:
+               self.movesCounter += 1
+               
             if(column == 0):
                 column = 7
             else:
@@ -30,13 +37,18 @@ class QueenSolver:
             self.isFinalState = self.InFinalState()
                 
     def InFinalState(self):
-        if(self.no_conflict == 8):
+        if(self.no_conflict == 8 or self.no_change == 20):
+            print 'Final queen moves: '+str(self.movesCounter)
             print "Final State list: "
             self.showQueens()
             return True
-        else:
+        elif(self.same_col == False):
+            print 'Queen moves: '+str(self.movesCounter)
             print "New Queen list: "
-            self.showQueens() 
+            self.showQueens()
+            self.no_change = 0
+        else:
+            self.same_col = False
         return False
         
     def ConflictCount(self, row, column):
