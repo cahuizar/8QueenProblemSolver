@@ -10,4 +10,3 @@ This program was created for CSCI-48700 with the purpose that it will solve the 
 ##Other Instructions
 1. random.seed(5)
 2. Python 2.7.13
-3. 
